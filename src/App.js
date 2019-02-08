@@ -1,25 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ProductList from './components/ProductList'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedProducts:[],
+      products: [
+        {id:1,name:'aaa',brand:'Nike'},
+        
+      ]
+    }
+  }
+
+  componentDidMount() {
+    this.setState({selectedProducts:[],
+        products: [
+          {id:1,name:'aaaaa',brand:'Nike'},
+          {id:2,name:'bccbb',brand:'Adidas'},
+          {id:3,name:'ccc',brand:'Croc'},
+        ]
+      })
+    }
+
+
+  handleProductSelect (product) {
+    this.setState(prevState => {
+      return {
+        selectedProducts: prevState.selectedProducts.concat(product)
+      }
+    })
+  }
+  // handleProductSelect (product) {
+  //     this.setState(prevState => {
+  //       return {
+  //         selectedProducts: prevState.selectedProducts.concat(product)
+  //       }
+  //     });
+  //   }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <h1>My Product Store</h1>
+        <p>You have selected {this.state.selectedProducts.length} product(s).</p>
+        <ProductList
+          products={this.state.products}
+          onProductSelect={this.handleProductSelect.bind(this)}
+        />
       </div>
     );
   }
