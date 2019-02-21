@@ -1,0 +1,9 @@
+psycopg2==2.7.5
+psycopg2-binary==2.7.5
+robotframework==3.0.4
+robotframework-databaselibrary==1.0.1
+robotframework-appiumlibrary==1.5.0.1
+robotframework-selenium2library==3.0.0
+robotframework-seleniumlibrary==3.1.1
+selenium==3.14.1
+urllib3==1.23
