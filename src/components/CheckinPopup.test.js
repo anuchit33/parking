@@ -61,14 +61,16 @@ describe("event", () => {
     expect(wrapper.instance().handleSubmitCheckin).toHaveBeenCalledTimes(1)
     
   });
-  it("should call submit check in", () => {
-    // const btnSubmitCheckin = wrapper.find('#btnSubmitCheckin');
-    // expect(handelSubmitCheckin.mock.calls.length).toEqual(0);
-    // btnSubmitCheckin.simulate('click');
-    // expect(wrapper.state('popup_confirm_display')).toEqual(true)
-    // expect(wrapper.state('popup_confirm_message')).toEqual('สำเร็จ')
-    // expect(handelSubmitCheckin.mock.calls.length).toEqual(1);
 
-  });
+
+  it('Unittest handleInput car_number', () => {
+   
+    const value = '1111'
+    const e = {}
+    const v = {value: value,name: 'car_number'}    
+    wrapper.instance().handleInput(e,v)
+
+    expect(wrapper.state('car_number')).toBe(value)
+  })
 });
 
