@@ -21,6 +21,7 @@ describe("render", () => {
       expect( wrapper.find('#inputCarNumber')).toHaveLength(1)
       expect( wrapper.find('#inputRFID')).toHaveLength(1)
       expect( wrapper.find('#btnSubmitCheckin')).toHaveLength(1)
+      expect( wrapper.find('#btnCancelCheckin')).toHaveLength(1)
     });
    
 });
@@ -60,6 +61,19 @@ describe("event", () => {
     // click button
     btnSubmitCheckin.simulate('click');
     expect(wrapper.instance().handleSubmitCheckin).toHaveBeenCalledTimes(1)
+    
+  });
+
+  it(" simulate onClick  btnCancelCheckin", () => {
+    
+    const btnCancelCheckin = wrapper.find('#btnCancelCheckin');
+
+    wrapper.instance().handleCancelCheckin = jest.fn()
+    expect(wrapper.instance().handleCancelCheckin).toHaveBeenCalledTimes(0)
+
+    // click button
+    btnCancelCheckin.simulate('click');
+    expect(wrapper.instance().handleCancelCheckin).toHaveBeenCalledTimes(1)
     
   });
 
@@ -103,6 +117,16 @@ describe("event", () => {
   it('Unittest handleCloseAlert and call props onClose', () => {
 
     wrapper.instance().handleCloseAlert() // 
+    expect(props.onClose).toHaveBeenCalledTimes(1) 
+    props.onClose.mockClear()
+    
+  })
+
+
+
+  it('Unittest handleCancelCheckin and call props onClose', () => {
+
+    wrapper.instance().handleCancelCheckin() // 
     expect(props.onClose).toHaveBeenCalledTimes(1) 
     props.onClose.mockClear()
     
