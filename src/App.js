@@ -9,6 +9,7 @@ class App extends Component {
     this.state = {
       display_popup_checkin: false,
       items: [],
+      disabled_btn_checkin: false,
       limit: 50
     }
 
@@ -33,13 +34,14 @@ class App extends Component {
   }
 
   render() {
+    const disabled_btn_checkin = this.state.items.length>=this.state.limit
     return (
       <Container textAlign='center' style={{width: '500px'}}>
         <br /><br />
         <Segment placeholder>
           <Header as='h1'>Parking System</Header>
           <p>
-            <button className='ui big green button' id="btnCheckin" onClick={()=>this.handelOpenCheckinPopup()}>Check In</button>
+            <button className='ui big green button' id="btnCheckin" disabled={disabled_btn_checkin} onClick={()=>this.handelOpenCheckinPopup()}>Check In</button>
           </p>
           
           {/* <p>
