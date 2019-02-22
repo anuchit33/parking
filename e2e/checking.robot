@@ -51,3 +51,20 @@ test เช็กอินปกติได้
 
    # จำนวนเต็ม error
    Element Text Should Be    id:car_amount    1
+
+    Close Window
+test เช็กอินคันที่51
+  ตรวจสอบการเข้าถึงหน้าแรก    ${urlmainpage}?car_size=50
+
+  # ตรวจสอบคลิกปุ่ม และ disabled ปุ่ม
+  Wait Until Page Contains Element  id:btnCheckin
+  Element Should Be Disabled   id:btnCheckin
+  
+  
+  #Wait Until Page Contains Element  id:lebelAlert
+
+  # คลิกปุ่มเช็กอินเปิดหน้าต่างเช็กอิน
+  
+
+
+  Close Window
