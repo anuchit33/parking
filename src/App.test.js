@@ -7,6 +7,7 @@ describe("render", () => {
   it('renders without crashing', () => {
     const wrapper = mount(<App />);
     expect(wrapper.find('#btnCheckin')).toHaveLength(1)
+    expect(wrapper.find('#btnCheckout')).toHaveLength(1)
     expect(wrapper.find(CheckInPoup)).toHaveLength(1)
     expect(wrapper.find('#car_amount')).toHaveLength(1)
     expect(wrapper.find('#car_amount').text()).toEqual('0')
@@ -56,6 +57,19 @@ describe("event", () => {
     // click button
     btnCheckin.simulate('click');
     expect(wrapper.instance().handelOpenCheckinPopup).toHaveBeenCalledTimes(1)
+    
+  });
+
+  it(" simulate onClick  btnCheckout", () => {
+    const wrapper = shallow(<App />);
+
+    wrapper.instance().handelOpenRFIDPopup = jest.fn()
+    const btnCheckout = wrapper.find('#btnCheckout');
+    expect(wrapper.instance().handelOpenRFIDPopup).toHaveBeenCalledTimes(0)
+
+    // click button
+    btnCheckout.simulate('click');
+    expect(wrapper.instance().handelOpenRFIDPopup).toHaveBeenCalledTimes(1)
     
   });
 
