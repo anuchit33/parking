@@ -12,6 +12,20 @@ describe("render", () => {
     expect(wrapper.find('#car_amount').text()).toEqual('0')
   });
 
+  it('renders full alert', () => {
+    const wrapper = mount(<App />);
+
+    // auto add car 50 item
+    for(let i=0;i<50;i++)
+      wrapper.instance().handelSubmitCheckin({car_number: '11'+i,rfid: '1'+i})
+    
+    // car item = 50
+    expect(wrapper.state('items').length).toBe(50)
+
+    const btnCheckin = wrapper.find('#btnCheckin')
+    expect(btnCheckin.prop('disabled')).toBe('')
+    
+  });
 });
 
 describe("event", () => {
