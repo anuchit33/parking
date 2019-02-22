@@ -39,8 +39,9 @@ it('renders car 50item to show alert', () => {
   
   // car item = 50
   expect(wrapper.state('items').length).toBe(50)
-
-  expect(wrapper.find('#lebelAlert')).toHaveLength(1)
+  
+  setTimeout(()=>{expect(wrapper.find('#lebelAlert')).toHaveLength(1)},100)
+  
   
 });
 
