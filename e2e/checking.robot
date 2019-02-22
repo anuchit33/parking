@@ -61,7 +61,9 @@ test เช็กอินคันที่51
   Element Should Be Disabled   id:btnCheckin
   
   
-  #Wait Until Page Contains Element  id:lebelAlert
+  # แสดงการแจ้งเตือน รถเต็มแล้ว
+  Wait Until Page Contains Element  id:lebelAlert
+  Element Text Should Be    id:lebelAlert    รถเต็มแล้ว
 
   # คลิกปุ่มเช็กอินเปิดหน้าต่างเช็กอิน
   
