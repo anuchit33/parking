@@ -12,7 +12,7 @@ class App extends Component {
       limit: 50
     }
 
-    this.handelOpenCheckinPopup = this.handelOpenCheckinPopup.bind(this)
+    //this.handelOpenCheckinPopup = this.handelOpenCheckinPopup.bind(this)
     this.handelSubmitCheckin = this.handelSubmitCheckin.bind(this)
     this.handelCloseCheckinPopup = this.handelCloseCheckinPopup.bind(this)
   }
@@ -40,7 +40,7 @@ class App extends Component {
         <Segment placeholder>
           <Header as='h1'>Parking System</Header>
           <p>
-            <button className='ui big green button' id="btnCheckin" onClick={this.handelOpenCheckinPopup}>Check In</button>
+            <button className='ui big green button' id="btnCheckin" onClick={()=>this.handelOpenCheckinPopup()}>Check In</button>
           </p>
           
           {/* <p>
