@@ -75,7 +75,7 @@ class CheckInPoup extends Component {
               </Grid.Row>
             </Grid>
 
-            <ConfirmPopup open={this.state.popup_confirm_display} message={this.state.popup_confirm_message} onClose={this.handleCloseAlert} />
+            <ConfirmPopup open={this.state.popup_confirm_display} message={this.state.popup_confirm_message} onClose={()=>this.handleCloseAlert()} />
           </Modal.Description>
         </Modal.Content>
       </Modal>
