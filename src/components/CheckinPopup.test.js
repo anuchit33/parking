@@ -34,9 +34,17 @@ describe("event", () => {
 
     wrapper.instance().handleInput = jest.fn()
     wrapper.find('#inputCarNumber').simulate('change')
-
     expect(wrapper.instance().handleInput).toHaveBeenCalledTimes(1)
+    wrapper.instance().handleInput.mockClear()
+    
+  })
 
+  it('simulate onChange rfid', () => {
+    const wrapper = shallow(<CheckinPopup {...props} />)
+
+    wrapper.instance().handleInput = jest.fn()
+    wrapper.find('#inputRFID').simulate('change')
+    expect(wrapper.instance().handleInput).toHaveBeenCalledTimes(1)
     wrapper.instance().handleInput.mockClear()
     
   })
