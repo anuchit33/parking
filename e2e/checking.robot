@@ -111,3 +111,5 @@ test ยกเลิกเช็กอิน
   Wait Until Page Contains Element  id:btnCancelCheckin
   Click Element   id:btnCancelCheckin
   Wait Until Page Does Not Contain Element  id:checkinPopup
+  
+  Close Window
