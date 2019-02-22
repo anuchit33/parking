@@ -12,12 +12,12 @@ class App extends Component {
       limit: 50
     }
 
-    //this.handelOpenCheckinPopup = this.handelOpenCheckinPopup.bind(this)
-    this.handelSubmitCheckin = this.handelSubmitCheckin.bind(this)
-    this.handelCloseCheckinPopup = this.handelCloseCheckinPopup.bind(this)
   }
 
   componentDidMount() {
+
+    // var url = new URL(window.location.href)
+    // var c = url.searchParams.get("car_size")
 
   }
 
@@ -58,8 +58,8 @@ class App extends Component {
 
         <CheckInPoup 
           open={this.state.display_popup_checkin}
-          onSubmitSuccess={this.handelSubmitCheckin}
-          onClose={this.handelCloseCheckinPopup}
+          onSubmitSuccess={(d)=>this.handelSubmitCheckin(d)}
+          onClose={()=>this.handelCloseCheckinPopup()}
            />
       </Container>
     );
