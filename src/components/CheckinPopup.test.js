@@ -72,5 +72,15 @@ describe("event", () => {
 
     expect(wrapper.state('car_number')).toBe(value)
   })
+
+  it('Unittest handleInput rfid', () => {
+   
+    const value = '1'
+    const e = {}
+    const v = {value: value,name: 'rfid'}    
+    wrapper.instance().handleInput(e,v)
+
+    expect(wrapper.state('rfid')).toBe(value)
+  })
 });
 
