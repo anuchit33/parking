@@ -17,8 +17,18 @@ class App extends Component {
 
   componentDidMount() {
 
-    // var url = new URL(window.location.href)
-    // var c = url.searchParams.get("car_size")
+    var url = new URL(window.location.href)
+    var c = url.searchParams.get("car_size")
+    let items = []
+    if(c){
+      for(let i=0;i<50;i++){
+        items.push({
+          car_number: '111'+i,
+          rfid: '1'+i
+        })
+      }
+      this.setState({items: items})
+    }
 
   }
 
