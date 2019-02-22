@@ -13,11 +13,11 @@ class CheckInPoup extends Component {
       popup_confirm_display: false
     }
 
-    this.handelSubmitCheckin = this.handelSubmitCheckin.bind(this)
-    this.handelCloseAlert = this.handelCloseAlert.bind(this)
+    this.handleSubmitCheckin = this.handleSubmitCheckin.bind(this)
+    this.handleCloseAlert = this.handleCloseAlert.bind(this)
   }
 
-  handelSubmitCheckin(){
+  handleSubmitCheckin(){
 
     this.setState({
       popup_confirm_message: 'สำเร็จ',
@@ -39,7 +39,7 @@ class CheckInPoup extends Component {
     })
   }
 
-  handelCloseAlert(){
+  handleCloseAlert(){
     this.props.onClose()
     this.setState({popup_confirm_display: false})
   }
@@ -69,15 +69,15 @@ class CheckInPoup extends Component {
                     </Form.Field>
                     <Form.Field>
                       <label>RFID</label>
-                      <Input placeholder='RFID' name='rfid' id='inputRFID' value={this.state.rfid}  onChange={(e,v)=>this.setState({rfid: v.value})} />
+                      <Input placeholder='RFID' name='rfid' id='inputRFID' value={this.state.rfid}  onChange={(e,v)=>this.handleInput(e,v)} />
                     </Form.Field>
-                    <Button type='button'  onClick={this.handelSubmitCheckin} id="btnSubmitCheckin" primary>Check In</Button>
+                    <Button type='button'  onClick={this.handleSubmitCheckin} id="btnSubmitCheckin" primary>Check In</Button>
                   </Form>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
 
-            <ConfirmPopup open={this.state.popup_confirm_display} message={this.state.popup_confirm_message} onClose={this.handelCloseAlert} />
+            <ConfirmPopup open={this.state.popup_confirm_display} message={this.state.popup_confirm_message} onClose={this.handleCloseAlert} />
           </Modal.Description>
         </Modal.Content>
       </Modal>
