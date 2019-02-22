@@ -53,6 +53,7 @@ test เช็กอินปกติได้
    Element Text Should Be    id:car_amount    1
 
     Close Window
+
 test เช็กอินคันที่51
   ตรวจสอบการเข้าถึงหน้าแรก    ${urlmainpage}?car_size=50
 
@@ -65,8 +66,15 @@ test เช็กอินคันที่51
   Wait Until Page Contains Element  id:lebelAlert
   Element Text Should Be    id:lebelAlert    รถเต็มแล้ว
 
-  # คลิกปุ่มเช็กอินเปิดหน้าต่างเช็กอิน
+test เช็กอิน RFID ซ้ำ
+  ตรวจสอบการเข้าถึงหน้าแรก    ${urlmainpage}
   
+  นำเข้ารถ1111และRFID1
+  
+  นำเข้ารถ1111และRFID1
 
+  # กดปุ่มบันทึกเช็กอินสำเร็จ
+  Wait Until Page Contains Element  id:alert_message
+  Element Text Should Be    id:alert_message    ผิดพลาก RFID 1 ถูกใช้งานแล้ว
 
   Close Window
