@@ -122,13 +122,14 @@ describe("event", () => {
     
   })
 
-
-
   it('Unittest handleCancelCheckin and call props onClose', () => {
 
     wrapper.instance().handleCancelCheckin() // 
     expect(props.onClose).toHaveBeenCalledTimes(1) 
     props.onClose.mockClear()
+
+    expect(wrapper.state('car_number')).toBe('')
+    expect(wrapper.state('rfid')).toBe('')
     
   })
 
