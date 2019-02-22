@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import CheckInPoup from './components/CheckinPopup'
-import { Container, Header, Segment ,Statistic} from 'semantic-ui-react'
+import { Container, Header, Segment ,Statistic,Message} from 'semantic-ui-react'
 
 class App extends Component {
   constructor(props) {
@@ -50,6 +50,10 @@ class App extends Component {
         <br /><br />
         <Segment placeholder>
           <Header as='h1'>Parking System</Header>
+          {disabled_btn_checkin &&   
+          <Message negative id='lebelAlert'>
+            <p>รถเต็มแล้ว</p>
+          </Message>}
           <p>
             <button className='ui big green button' id="btnCheckin" disabled={disabled_btn_checkin} onClick={()=>this.handelOpenCheckinPopup()}>Check In</button>
           </p>
