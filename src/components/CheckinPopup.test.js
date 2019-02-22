@@ -48,6 +48,19 @@ describe("event", () => {
     wrapper.instance().handleInput.mockClear()
     
   })
+
+  it(" simulate onClick  btnSubmitCheckin", () => {
+    
+    const btnSubmitCheckin = wrapper.find('#btnSubmitCheckin');
+
+    wrapper.instance().handleSubmitCheckin = jest.fn()
+    expect(wrapper.instance().handleSubmitCheckin).toHaveBeenCalledTimes(0)
+
+    // click button
+    btnSubmitCheckin.simulate('click');
+    expect(wrapper.instance().handleSubmitCheckin).toHaveBeenCalledTimes(1)
+    
+  });
   it("should call submit check in", () => {
     // const btnSubmitCheckin = wrapper.find('#btnSubmitCheckin');
     // expect(handelSubmitCheckin.mock.calls.length).toEqual(0);
