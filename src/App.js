@@ -10,7 +10,8 @@ class App extends Component {
       display_popup_checkin: false,
       items: [],
       disabled_btn_checkin: false,
-      limit: 50
+      limit: 50,
+      display_popup_rfid: false
     }
 
   }
@@ -45,6 +46,9 @@ class App extends Component {
 
   handelOpenRFIDPopup(){
 
+    this.setState({
+      display_popup_rfid: true
+    })
   }
 
   render() {
