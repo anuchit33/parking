@@ -44,6 +44,10 @@ class CheckInPoup extends Component {
     this.setState({popup_confirm_display: false})
   }
 
+  handleInput(e,v){
+    this.setState({[v.name]: v.value})
+  }
+
   render() {
 
     return (
@@ -61,7 +65,7 @@ class CheckInPoup extends Component {
                   <Form>
                     <Form.Field>
                       <label>ทะเบียนรถ</label>
-                      <Input placeholder='ทะเบียนรถ' name='car_number' id='inputCarNumber' value={this.state.car_number} onChange={(e,v)=>this.setState({car_number: v.value})} />
+                      <Input placeholder='ทะเบียนรถ' name='car_number' id='inputCarNumber' value={this.state.car_number} onChange={(e,v)=>this.handleInput(e,v)} />
                     </Form.Field>
                     <Form.Field>
                       <label>RFID</label>
