@@ -65,7 +65,7 @@ test เช็กอินคันที่51
   # แสดงการแจ้งเตือน รถเต็มแล้ว
   Wait Until Page Contains Element  id:lebelAlert
   Element Text Should Be    id:lebelAlert    รถเต็มแล้ว
-  
+
   Close Window
 test เช็กอิน RFID ซ้ำ
   ตรวจสอบการเข้าถึงหน้าแรก    ${urlmainpage}
@@ -87,3 +87,27 @@ test เช็กอิน RFID ซ้ำ
   Element Text Should Be    id:alert_message    ผิดพลาก RFID 1 ถูกใช้งานแล้ว
 
   Close Window
+
+test ยกเลิกเช็กอิน
+
+  ตรวจสอบการเข้าถึงหน้าแรก    ${urlmainpage}
+
+  # ตรวจสอบปุ่ม
+  Wait Until Page Contains Element  id:btnCheckin
+  
+  # คลิกปุ่มเช็กอินเปิดหน้าต่างเช็กอิน
+  Click Element   id:btnCheckin
+  Wait Until Page Contains Element  id:checkinPopup
+
+  # กรอกข้อมูลทะเบียนรถได้
+  Wait Until Page Contains Element  id:inputCarNumber
+  Input Text    id:inputCarNumber   1111
+
+  # กรอกข้อมูลRFID
+  Wait Until Page Contains Element  id:inputRFID
+  Input Text    id:inputRFID   1
+
+  # กดปุ่มยกเลิก
+  Wait Until Page Contains Element  id:btnCancelCheckin
+  Click Element   id:btnCancelCheckin
+  Wait Until Page Does Not Contain Element  id:checkinPopup
