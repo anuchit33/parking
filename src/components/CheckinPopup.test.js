@@ -109,10 +109,11 @@ describe("event", () => {
   })
 
   it('Unittest handleSubmitCheckin rfid duplicate fail', () => {
-    props['car_items'] = {
+    props['car_items'].push( {
       car_number: '113',
       rfid: '1'
-    }
+    })
+    const e = {}
     const wrapper = shallow(<CheckinPopup {...props} />) 
     wrapper.instance().handleInput(e,{value: '111',name: 'car_number'} )
     wrapper.instance().handleInput(e,{value: '1',name: 'rfid'} )
@@ -122,14 +123,12 @@ describe("event", () => {
     // not call onSubmitSuccess
     expect(props.onSubmitSuccess).toHaveBeenCalledTimes(0) 
     
-    expect(wrapper.state('car_number')).toBe('111')
-    expect(wrapper.state('rfid')).toBe('1')
+    expect(wrapper.state('car_number')).toBe('')
+    expect(wrapper.state('rfid')).toBe('')
 
     // state confirm popup error
     expect(wrapper.state('popup_confirm_display')).toBe(true)
-    expect(wrapper.state('popup_confirm_message')).toBe('รถเต็มแล้ว')
-
-    props.onSubmitSuccess.mockClear()
+    expect(wrapper.state('popup_confirm_message')).toBe('ผิดพลาก RFID 1 ถูกใช้งานแล้ว')
     
   })
 });
