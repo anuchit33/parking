@@ -6,7 +6,8 @@ let wrapper,handelSubmitCheckin=jest.fn(),handleCloseAlert=jest.fn();
 const props = {
   open: true,
   onSubmitSuccess:handelSubmitCheckin,
-  onClose: handleCloseAlert
+  onClose: handleCloseAlert,
+  car_items: []
 }
 describe("render", () => {
   
@@ -104,6 +105,31 @@ describe("event", () => {
     wrapper.instance().handleCloseAlert() // 
     expect(props.onClose).toHaveBeenCalledTimes(1) 
     props.onClose.mockClear()
+    
+  })
+
+  it('Unittest handleSubmitCheckin rfid duplicate fail', () => {
+    props['car_items'] = {
+      car_number: '113',
+      rfid: '1'
+    }
+    const wrapper = shallow(<CheckinPopup {...props} />) 
+    wrapper.instance().handleInput(e,{value: '111',name: 'car_number'} )
+    wrapper.instance().handleInput(e,{value: '1',name: 'rfid'} )
+
+    wrapper.instance().handleSubmitCheckin() // 
+    
+    // not call onSubmitSuccess
+    expect(props.onSubmitSuccess).toHaveBeenCalledTimes(0) 
+    
+    expect(wrapper.state('car_number')).toBe('111')
+    expect(wrapper.state('rfid')).toBe('1')
+
+    // state confirm popup error
+    expect(wrapper.state('popup_confirm_display')).toBe(true)
+    expect(wrapper.state('popup_confirm_message')).toBe('รถเต็มแล้ว')
+
+    props.onSubmitSuccess.mockClear()
     
   })
 });
