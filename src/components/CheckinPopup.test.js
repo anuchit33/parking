@@ -93,6 +93,7 @@ describe("event", () => {
     expect(wrapper.state('rfid')).toBe('')
 
     props.onSubmitSuccess.mockClear()
+    
   })
 });
 
