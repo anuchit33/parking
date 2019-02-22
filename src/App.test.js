@@ -15,12 +15,25 @@ describe("render", () => {
 });
 
 describe("event", () => {
-  it("should call productSelect", () => {
+  it(" simulate onClick  btnCheckin", () => {
     const wrapper = shallow(<App />);
-    const btnCheckin = wrapper.find('#btnCheckin');
-    btnCheckin.simulate('click');
-    expect(wrapper.state('display_popup_checkin')).toEqual(true)
 
+    wrapper.instance().handelOpenCheckinPopup = jest.fn()
+    const btnCheckin = wrapper.find('#btnCheckin');
+    expect(wrapper.instance().handelOpenCheckinPopup).toHaveBeenCalledTimes(0)
+
+    // click button
+    btnCheckin.simulate('click');
+    expect(wrapper.instance().handelOpenCheckinPopup).toHaveBeenCalledTimes(1)
+    
   });
+
+  it('Unittest handelOpenCheckinPopup', () => {
+    const wrapper = shallow(<App />)
+    wrapper.instance().handelOpenCheckinPopup()
+
+    // display_popup_checkin is True
+    expect(wrapper.state('display_popup_checkin')).toBe(true)
+  })
 
 });
