@@ -76,6 +76,7 @@ class App extends Component {
           open={this.state.display_popup_checkin}
           onSubmitSuccess={(d)=>this.handelSubmitCheckin(d)}
           onClose={()=>this.handelCloseCheckinPopup()}
+          car_items={this.state.items}
            />
       </Container>
     );

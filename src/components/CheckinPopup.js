@@ -15,17 +15,39 @@ class CheckInPoup extends Component {
 
   }
 
+  checkValid(){
+
+    for(let i in this.props.car_items){
+      const item = this.props.car_items[i]
+      console.log(this.state.rfid,item.rfid)
+      // rfid duplicate
+      console.log('rfid',this.state.rfid,item.rfid)
+      if(this.state.rfid==item.rfid){
+        this.setState({
+          popup_confirm_message: 'ผิดพลาก RFID '+item.rfid+' ถูกใช้งานแล้ว',
+          popup_confirm_display: true
+        } )
+        return false
+      }
+    }
+
+    return true
+  }
+
   handleSubmitCheckin(){
 
-    this.setState({
-      popup_confirm_message: 'สำเร็จ',
-      popup_confirm_display: true
-    } )
 
-    this.props.onSubmitSuccess({
-      car_number: this.state.car_number,
-      rfid: this.state.rfid
-    })
+    if(this.checkValid()==true){
+      this.setState({
+        popup_confirm_message: 'สำเร็จ',
+        popup_confirm_display: true
+      } )
+
+      this.props.onSubmitSuccess({
+        car_number: this.state.car_number,
+        rfid: this.state.rfid
+      })      
+    }
 
     this.reset()
   }
@@ -85,7 +107,8 @@ class CheckInPoup extends Component {
 CheckInPoup.propTypes = {
   open: PropTypes.bool.isRequired,
   onSubmitSuccess : PropTypes.func.isRequired,
-  onClose : PropTypes.func.isRequired
+  onClose : PropTypes.func.isRequired,
+  car_items: PropTypes.array.isRequired
 }
 
 export default CheckInPoup;
