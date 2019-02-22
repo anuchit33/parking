@@ -43,7 +43,7 @@ class CheckInPoup extends Component {
   }
 
   handleInput(e,v){
-    //this.setState({[v.name]: v.value})
+    this.setState({[v.name]: v.value})
   }
 
   render() {
