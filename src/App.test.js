@@ -12,7 +12,7 @@ describe("render", () => {
     expect(wrapper.find('#car_amount').text()).toEqual('0')
   });
 
-  it('renders full alert', () => {
+  it('renders car 50item to disabled btnCheckin', () => {
     const wrapper = mount(<App />);
 
     // auto add car 50 item
@@ -23,7 +23,7 @@ describe("render", () => {
     expect(wrapper.state('items').length).toBe(50)
 
     const btnCheckin = wrapper.find('#btnCheckin')
-    expect(btnCheckin.prop('disabled')).toBe('')
+    expect(btnCheckin.prop('disabled')).toBe(false)
     
   });
 });
