@@ -13,8 +13,6 @@ class CheckInPoup extends Component {
       popup_confirm_display: false
     }
 
-    this.handleSubmitCheckin = this.handleSubmitCheckin.bind(this)
-    this.handleCloseAlert = this.handleCloseAlert.bind(this)
   }
 
   handleSubmitCheckin(){
@@ -71,7 +69,7 @@ class CheckInPoup extends Component {
                       <label>RFID</label>
                       <Input placeholder='RFID' name='rfid' id='inputRFID' value={this.state.rfid}  onChange={(e,v)=>this.handleInput(e,v)} />
                     </Form.Field>
-                    <Button type='button'  onClick={this.handleSubmitCheckin} id="btnSubmitCheckin" primary>Check In</Button>
+                    <Button type='button'  onClick={()=>this.handleSubmitCheckin()} id="btnSubmitCheckin" primary>Check In</Button>
                   </Form>
                 </Grid.Column>
               </Grid.Row>
