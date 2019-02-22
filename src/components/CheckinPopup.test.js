@@ -2,11 +2,11 @@ import React from 'react';
 import CheckinPopup from './CheckinPopup'
 import {shallow} from 'enzyme';
 
-let wrapper,handelSubmitCheckin=jest.fn(),handelCloseCheckout=jest.fn();
+let wrapper,handelSubmitCheckin=jest.fn(),handleCloseAlert=jest.fn();
 const props = {
   open: true,
   onSubmitSuccess:handelSubmitCheckin,
-  onClose: handelCloseCheckout
+  onClose: handleCloseAlert
 }
 describe("render", () => {
   
@@ -88,11 +88,22 @@ describe("event", () => {
 
     wrapper.instance().handleSubmitCheckin() // 
     expect(props.onSubmitSuccess).toHaveBeenCalledTimes(1) 
-    expect(props.onSubmitSuccess.mock.calls).toEqual({ car_number: '111', rfid: '1' })
+    console.log(props.onSubmitSuccess.mock.calls[0][0])
+    expect(props.onSubmitSuccess.mock.calls[0][0]).toEqual({ car_number: '111', rfid: '1' })
+    
     expect(wrapper.state('car_number')).toBe('')
     expect(wrapper.state('rfid')).toBe('')
 
     props.onSubmitSuccess.mockClear()
+    
+  })
+
+
+  it('Unittest handleCloseAlert and call props onClose', () => {
+
+    wrapper.instance().handleCloseAlert() // 
+    expect(props.onClose).toHaveBeenCalledTimes(1) 
+    props.onClose.mockClear()
     
   })
 });
