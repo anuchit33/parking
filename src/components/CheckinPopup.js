@@ -34,6 +34,10 @@ class CheckInPoup extends Component {
     return true
   }
 
+  handleCancelCheckin(){
+    this.reset()
+    this.props.onClose()
+  }
   handleSubmitCheckin(){
 
 
@@ -92,6 +96,7 @@ class CheckInPoup extends Component {
                       <Input placeholder='RFID' name='rfid' id='inputRFID' value={this.state.rfid}  onChange={(e,v)=>this.handleInput(e,v)} />
                     </Form.Field>
                     <Button type='button'  onClick={()=>this.handleSubmitCheckin()} id="btnSubmitCheckin" primary>Check In</Button>
+                    <Button type='button'  onClick={()=>this.handleCancelCheckin()} id="btnCancelCheckin" >Cancel</Button>
                   </Form>
                 </Grid.Column>
               </Grid.Row>
