@@ -65,12 +65,21 @@ test เช็กอินคันที่51
   # แสดงการแจ้งเตือน รถเต็มแล้ว
   Wait Until Page Contains Element  id:lebelAlert
   Element Text Should Be    id:lebelAlert    รถเต็มแล้ว
-
+  
+  Close Window
 test เช็กอิน RFID ซ้ำ
   ตรวจสอบการเข้าถึงหน้าแรก    ${urlmainpage}
   
   นำเข้ารถ1111และRFID1
   
+  # กดปุ่มบันทึกเช็กอินสำเร็จ
+  Wait Until Page Contains Element  id:alert_message
+  Element Text Should Be    id:alert_message    สำเร็จ
+
+  # กดยืนยัน
+  Wait Until Page Contains Element  id:btnAlertOK
+  Click Element   id:btnAlertOK
+
   นำเข้ารถ1111และRFID1
 
   # กดปุ่มบันทึกเช็กอินสำเร็จ
