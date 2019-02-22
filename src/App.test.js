@@ -105,14 +105,12 @@ describe("event", () => {
 
   it('Unittest handelOpenRFIDPopup', () => {
     const wrapper = shallow(<App />)
+    expect(wrapper.state('display_popup_rfid')).toBe(false)
 
-    // befor call handelCloseCheckinPopup
-    wrapper.instance().setState({display_popup_rfid: true})
-    expect(wrapper.state('display_popup_rfid')).toBe(true)
-
+    // call handelOpenRFIDPopup
     wrapper.instance().handelOpenRFIDPopup()
 
     // display_popup_checkin is False
-    expect(wrapper.state('display_popup_rfid')).toBe(false)
+    expect(wrapper.state('display_popup_rfid')).toBe(true)
   })
 });
