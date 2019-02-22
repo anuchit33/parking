@@ -36,4 +36,24 @@ describe("event", () => {
     expect(wrapper.state('display_popup_checkin')).toBe(true)
   })
 
+  it('Unittest handelSubmitCheckin', () => {
+    const wrapper = shallow(<App />)
+    wrapper.instance().handelSubmitCheckin({car_number: '111',rfid: '1'})
+
+    // car item = 1
+    expect(wrapper.state('items').length).toBe(1)
+  })
+
+  it('Unittest handelCloseCheckinPopup', () => {
+    const wrapper = shallow(<App />)
+
+    // befor call handelCloseCheckinPopup
+    wrapper.instance().setState({display_popup_checkin: true})
+    expect(wrapper.state('display_popup_checkin')).toBe(true)
+
+    wrapper.instance().handelCloseCheckinPopup()
+
+    // display_popup_checkin is False
+    expect(wrapper.state('display_popup_checkin')).toBe(false)
+  })
 });
