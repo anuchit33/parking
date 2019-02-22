@@ -24,7 +24,6 @@ class App extends Component {
   handelSubmitCheckin(data){
     let items = this.state.items
     items.push(data)
-    //this.setState({items: items,display_popup_checkin: false})
   }
   handelOpenCheckinPopup(){
     this.setState({display_popup_checkin: true})

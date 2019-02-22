@@ -4,13 +4,6 @@ import { Modal,Button } from 'semantic-ui-react'
 
 class ConfirmPopup extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-  }
-
   render() {
     return (
       <Modal open={this.props.open} size='tiny'>
