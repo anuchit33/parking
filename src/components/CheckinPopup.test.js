@@ -88,7 +88,7 @@ describe("event", () => {
 
     wrapper.instance().handleSubmitCheckin() // 
     expect(props.onSubmitSuccess).toHaveBeenCalledTimes(1) 
-    console.log(props.onSubmitSuccess.mock.calls[0][0])
+    
     expect(props.onSubmitSuccess.mock.calls[0][0]).toEqual({ car_number: '111', rfid: '1' })
     
     expect(wrapper.state('car_number')).toBe('')
