@@ -43,6 +43,10 @@ class App extends Component {
     this.setState({display_popup_checkin: false})
   }
 
+  handelOpenRFIDPopup(){
+
+  }
+
   render() {
     const disabled_btn_checkin = this.state.items.length>=this.state.limit
     return (
@@ -56,6 +60,10 @@ class App extends Component {
           </Message>}
           <p>
             <button className='ui big green button' id="btnCheckin" disabled={disabled_btn_checkin} onClick={()=>this.handelOpenCheckinPopup()}>Check In</button>
+          </p>
+
+          <p>
+            <button className='ui big red button' id="btnCheckout" onClick={()=>this.handelOpenRFIDPopup()}>Check Out</button>
           </p>
           
           {/* <p>
