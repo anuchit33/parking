@@ -28,6 +28,22 @@ describe("render", () => {
   });
 });
 
+it('renders car 50item to show alert', () => {
+  const wrapper = mount(<App />);
+
+  expect(wrapper.find('#lebelAlert')).toHaveLength(0)
+
+  // auto add car 50 item
+  for(let i=0;i<50;i++)
+    wrapper.instance().handelSubmitCheckin({car_number: '11'+i,rfid: '1'+i})
+  
+  // car item = 50
+  expect(wrapper.state('items').length).toBe(50)
+
+  expect(wrapper.find('#lebelAlert')).toHaveLength(1)
+  
+});
+
 describe("event", () => {
   it(" simulate onClick  btnCheckin", () => {
     const wrapper = shallow(<App />);
