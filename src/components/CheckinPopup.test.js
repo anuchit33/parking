@@ -66,21 +66,33 @@ describe("event", () => {
   it('Unittest handleInput car_number', () => {
    
     const value = '1111'
-    const e = {}
-    const v = {value: value,name: 'car_number'}    
+    const e = {},v = {value: value,name: 'car_number'}    
     wrapper.instance().handleInput(e,v)
-
     expect(wrapper.state('car_number')).toBe(value)
   })
 
   it('Unittest handleInput rfid', () => {
    
     const value = '1'
-    const e = {}
-    const v = {value: value,name: 'rfid'}    
+    const e = {},v = {value: value,name: 'rfid'}    
     wrapper.instance().handleInput(e,v)
 
     expect(wrapper.state('rfid')).toBe(value)
+  })
+
+  it('Unittest handleSubmitCheckin', () => {
+
+    const e = {}   
+    wrapper.instance().handleInput(e,{value: '111',name: 'car_number'} )
+    wrapper.instance().handleInput(e,{value: '1',name: 'rfid'} )
+
+    wrapper.instance().handleSubmitCheckin() // 
+    expect(props.onSubmitSuccess).toHaveBeenCalledTimes(1) 
+    expect(props.onSubmitSuccess.mock.calls).toEqual({ car_number: '111', rfid: '1' })
+    expect(wrapper.state('car_number')).toBe('')
+    expect(wrapper.state('rfid')).toBe('')
+
+    props.onSubmitSuccess.mockClear()
   })
 });
 
