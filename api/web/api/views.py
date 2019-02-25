@@ -5,8 +5,11 @@ from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+
+
+
 class CreateView(generics.ListCreateAPIView):
-    """This class defines the create behavior of our rest api."""
+    
     queryset = CarList.objects.all()
     serializer_class = CarlistSerializer
 
@@ -24,7 +27,7 @@ class CreateView(generics.ListCreateAPIView):
 
 # for test
 class ClearAllView(generics.ListAPIView):
-    """This class defines the create behavior of our rest api."""
+    
     
     serializer_class = CarlistSerializer
 
@@ -34,7 +37,7 @@ class ClearAllView(generics.ListAPIView):
         return []
 
 class AutoCreateView(APIView):
-    """This class defines the create behavior of our rest api."""
+    
     def get(self, request, size):
         queryset = CarList.objects.all()
         CarList.objects.all().delete()
@@ -45,3 +48,10 @@ class AutoCreateView(APIView):
                 number= 1000+i
             )
         return Response({})
+
+class GetCountView(APIView):
+    
+    def get(self,request):
+        count = CarList.objects.all().filter(status=1).count()
+
+        return Response({'count': count})
