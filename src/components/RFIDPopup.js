@@ -10,6 +10,12 @@ class RFIDPopup extends Component {
         this.state = {}
     }
 
+    handleInput(e,v){
+        this.setState({
+            [v.name]: v.value
+        })
+    }
+
     render() {
         return (
             
