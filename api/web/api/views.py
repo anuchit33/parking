@@ -11,3 +11,15 @@ class CreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         """Save the post data when creating a new carlist."""
         serializer.save()
+
+
+
+class ClearAllView(generics.ListAPIView):
+    """This class defines the create behavior of our rest api."""
+    
+    serializer_class = CarlistSerializer
+
+    def get_queryset(self):
+        queryset = CarList.objects.all()
+        CarList.objects.all().delete()
+        return []
