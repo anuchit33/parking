@@ -30,3 +30,5 @@ env/
 api/venv/
 __pycache__/
 migrations/
+package-lock.json
+*.sqlite3
