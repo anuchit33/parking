@@ -6,18 +6,18 @@ let wrapper, handleClosePopup=jest.fn();
 const props = {
   car_items: [],
   onClose: handleClosePopup,
+  open: true
 }
 describe("render", () => {
+
   it('renders without crashing', () => {
 
-    const wrapper = shallow(<RFIDPopup {...props} />);
-    expect(wrapper.find('#rfidPopup')).toHaveLength(1)
+    wrapper = shallow(<RFIDPopup {...props} />);
     expect(wrapper.find('#inputRFID')).toHaveLength(1)
   });
 });
 
 describe("event", () => {
-
 
 });
 
