@@ -20,3 +20,10 @@ class ViewTestCase(TestCase):
     def test_api_can_create_a_carlist(self):
         """Test the api has bucket creation capability."""
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+
+    def test_api_can_clear_a_carlist_for_robot_setup(self):
+
+        # call api
+        self.response = self.client.get(reverse('clear_all'),format="json")
+        self.assertEqual(self.response.status_code, 200)
+        
