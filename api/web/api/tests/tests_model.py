@@ -3,7 +3,7 @@ from api.models import CarList
 
 
 class ModelTestCase(TestCase):
-    """This class defines the test suite for the bucketlist model."""
+    """This class defines the test suite for the carlist model."""
 
     def setUp(self):
         """Define the test client and other test variables."""
@@ -11,8 +11,8 @@ class ModelTestCase(TestCase):
         self.car_rfid = '1'
         self.carlist = CarList(number=self.car_number,rfid=self.car_rfid)
 
-    def test_model_can_create_a_bucketlist(self):
-        """Test the bucketlist model can create a bucketlist."""
+    def test_model_can_create_a_carlist(self):
+        """Test the carlist model can create a carlist."""
         old_count = CarList.objects.count()
         self.carlist.save()
         new_count = CarList.objects.count()
