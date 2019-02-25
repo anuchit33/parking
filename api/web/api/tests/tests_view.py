@@ -138,7 +138,7 @@ class CarlistSizeViewTestCase(TestCase):
 
 
     def test_api_can_get_a_carlist_size(self):
-        
+        self.response = self.client.get( reverse('get_count'),format="json")
         self.assertEqual(self.response.status_code, 200)
-        self.assertIn('size',self.response.data)
-        self.assertIn('0',self.response.data['size'])
+        self.assertIn('count',self.response.data)
+        self.assertEqual(0,self.response.data['count'])

@@ -51,7 +51,7 @@ Get Requests
     # ดึงจำนวนรถทั้งหมด
     Create Session      api     http://127.0.0.1:8000
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${resp}=       GET Request      api     /carlist/size     headers=${headers}
+    ${resp}=       GET Request      api     /carlist/count/     headers=${headers}
     Log        ${resp.json()} 
     Should Be Equal As Strings      ${resp.status_code}     200
-    Dictionary Should Contain Value     ${resp.json()}      0
+    Dictionary Should Contain Key     ${resp.json()}        count
