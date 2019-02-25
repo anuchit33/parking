@@ -27,3 +27,4 @@ env/
 *.html
 *.xml
 .vscode/
+api/venv/
