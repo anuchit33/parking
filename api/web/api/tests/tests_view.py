@@ -28,6 +28,9 @@ class ViewTestCase(TestCase):
         self.assertEqual(self.response.status_code, 200)
 
     def test_api_can_not_create_a_carlist_fail(self):
+        # api clear
+        self.response = self.client.get(reverse('clear_all'),format="json")
+
         # create carlist 1111 , rfid = 1
         self.response = self.client.post(
             reverse('create'),
@@ -45,7 +48,7 @@ class ViewTestCase(TestCase):
         self.assertIn('ถูกใช้งานแล้ว',self.response.data['rfid'])
 
 
-    def test_api_can_not_create_a_carlist_fail(self):
+    def test_api_can_not_create_a_carlist_full_51item_fail(self):
         # create carlist 1111 , rfid = 1
 
         for i in range(0,50):
@@ -69,3 +72,57 @@ class ViewTestCase(TestCase):
         self.assertEqual(self.response.status_code, 400)
         self.assertIn('error',self.response.data)
         self.assertIn('เต็มแล้ว',self.response.data['error'])
+
+
+    def test_api_can_create_a_carlist_49_item(self):
+        # create carlist 1111 , rfid = 1
+
+        # api clear
+        self.response = self.client.get(reverse('clear_all'),format="json")
+
+        for i in range(0,48):
+            self.response = self.client.post(
+                reverse('create'),
+                {
+                    'rfid': i+1,
+                    'number': 1000+i
+                },
+                format="json")
+
+        # create dulication rfid and status = 1
+        # create carlist 1112 , rfid = 1
+        self.response = self.client.post(
+                reverse('create'),
+                {
+                    'rfid': 50,
+                    'number': 1050
+                },
+                format="json")
+        self.assertEqual(self.response.status_code, 201)
+
+
+    def test_api_can_create_a_carlist_50_item(self):
+        # create carlist 1111 , rfid = 1
+
+        # api clear
+        self.response = self.client.get(reverse('clear_all'),format="json")
+
+        for i in range(0,49):
+            self.response = self.client.post(
+                reverse('create'),
+                {
+                    'rfid': i+1,
+                    'number': 1000+i
+                },
+                format="json")
+
+        # create dulication rfid and status = 1
+        # create carlist 1112 , rfid = 1
+        self.response = self.client.post(
+                reverse('create'),
+                {
+                    'rfid': 50,
+                    'number': 1050
+                },
+                format="json")
+        self.assertEqual(self.response.status_code, 201)
