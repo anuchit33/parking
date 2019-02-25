@@ -12,13 +12,16 @@ class CreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         """Save the post data when creating a new carlist."""
 
+        if CarList.objects.filter(status=1).count() > 49:
+             raise serializers.ValidationError({'error': 'เต็มแล้ว' })
+
         queryset = CarList.objects.filter(rfid=serializer.validated_data['rfid'],status=1)
         if queryset.exists():
             raise serializers.ValidationError({'rfid': 'RFID %s ถูกใช้งานแล้ว' % (serializer.validated_data['rfid'])})
 
         serializer.save()
 
-
+# for test
 class ClearAllView(generics.ListAPIView):
     """This class defines the create behavior of our rest api."""
     
@@ -27,4 +30,19 @@ class ClearAllView(generics.ListAPIView):
     def get_queryset(self):
         queryset = CarList.objects.all()
         CarList.objects.all().delete()
+        return []
+
+class AutoCreateView(generics.ListAPIView):
+    """This class defines the create behavior of our rest api."""
+    serializer_class = CarlistSerializer
+
+    def get_queryset(self,size):
+        queryset = CarList.objects.all()
+        CarList.objects.all().delete()
+
+        for i in range(0,size):
+            CarList.objects.create(
+                rfid= i+1,
+                number= 1000+i
+            )
         return []
