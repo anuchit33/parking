@@ -18,6 +18,24 @@ describe("render", () => {
 });
 
 describe("event", () => {
+  it('simulate onChange inputRFID', () => {
+    const wrapper = shallow(<RFIDPopup {...props} />)
+
+    wrapper.instance().handleInput = jest.fn()
+    wrapper.find('#inputRFID').simulate('change')
+    expect(wrapper.instance().handleInput).toHaveBeenCalledTimes(1)
+    wrapper.instance().handleInput.mockClear()
+    
+  })
+
+  it('Unittest handleInput rfid', () => {
+   
+    const value = '1'
+    const e = {},v = {value: value,name: 'rfid'}    
+    wrapper.instance().handleInput(e,v)
+
+    expect(wrapper.state('rfid')).toBe(value)
+  })
 
 });
 
