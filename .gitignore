@@ -28,3 +28,5 @@ env/
 *.xml
 .vscode/
 api/venv/
+__pycache__/
+migrations/

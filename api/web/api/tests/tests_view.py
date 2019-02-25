@@ -1,7 +1,8 @@
 # Add these imports at the top
 from rest_framework.test import APIClient
 from rest_framework import status
-from django.core.urlresolvers import reverse
+from django.urls import reverse
+from unittest import TestCase
 
 # Define this after the ModelTestCase
 class ViewTestCase(TestCase):
