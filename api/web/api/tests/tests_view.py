@@ -126,3 +126,19 @@ class ViewTestCase(TestCase):
                 },
                 format="json")
         self.assertEqual(self.response.status_code, 201)
+
+
+class CarlistSizeViewTestCase(TestCase):
+    """Test suite for the api views."""
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.client = APIClient()
+        self.carlist_data = {'number': '1111','rfid': 1}
+
+
+    def test_api_can_get_a_carlist_size(self):
+        
+        self.assertEqual(self.response.status_code, 200)
+        self.assertIn('size',self.response.data)
+        self.assertIn('0',self.response.data['size'])
