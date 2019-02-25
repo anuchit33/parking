@@ -26,4 +26,18 @@ class ViewTestCase(TestCase):
         # call api
         self.response = self.client.get(reverse('clear_all'),format="json")
         self.assertEqual(self.response.status_code, 200)
-        
+
+    def test_api_can_not_create_a_carlist_fail(self):
+        # create carlist 1111 , rfid = 1
+        self.response = self.client.post(
+            reverse('create'),
+            self.carlist_data,
+            format="json")
+
+        # create dulication rfid and status = 1
+        # create carlist 1112 , rfid = 1
+        self.response = self.client.post(
+            reverse('create'),
+            self.carlist_data,
+            format="json")
+        self.assertEqual(self.response.status_code, 400)
