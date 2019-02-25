@@ -2,7 +2,8 @@ from rest_framework import generics
 from api.serializers import CarlistSerializer
 from api.models import CarList
 from rest_framework import serializers
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 class CreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
@@ -32,17 +33,15 @@ class ClearAllView(generics.ListAPIView):
         CarList.objects.all().delete()
         return []
 
-class AutoCreateView(generics.ListAPIView):
+class AutoCreateView(APIView):
     """This class defines the create behavior of our rest api."""
-    serializer_class = CarlistSerializer
-
-    def get_queryset(self,size):
+    def get(self, request, size):
         queryset = CarList.objects.all()
         CarList.objects.all().delete()
 
-        for i in range(0,size):
+        for i in range(0,int(size)):
             CarList.objects.create(
                 rfid= i+1,
                 number= 1000+i
             )
-        return []
+        return Response({})

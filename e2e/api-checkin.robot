@@ -37,7 +37,7 @@ Post Requests
     ${data}=    Create Dictionary    number=8888        rfid=51
 
     # จำรองสร้างรถ 50 รายการ
-    ${resp}=       GET Request      api     /carlist/create/50
+    ${resp}=       GET Request      api     /carlist/create/50/
     Should Be Equal As Strings      ${resp.status_code}     200
     
     ${resp}=       POST Request      api     /carlist/      data=${data}        headers=${headers}
