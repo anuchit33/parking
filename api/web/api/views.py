@@ -1,6 +1,7 @@
 from rest_framework import generics
 from api.serializers import CarlistSerializer
 from api.models import CarList
+from rest_framework import serializers
 
 
 class CreateView(generics.ListCreateAPIView):
@@ -10,8 +11,12 @@ class CreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         """Save the post data when creating a new carlist."""
-        serializer.save()
 
+        queryset = CarList.objects.filter(rfid=serializer.validated_data['rfid'],status=1)
+        if queryset.exists():
+            raise serializers.ValidationError({'rfid': 'RFID %s ถูกใช้งานแล้ว' % (serializer.validated_data['rfid'])})
+
+        serializer.save()
 
 
 class ClearAllView(generics.ListAPIView):
