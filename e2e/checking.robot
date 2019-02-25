@@ -1,8 +1,13 @@
 *** Settings ***
 Library   Selenium2Library
+Library     Collections
+Library     RequestsLibrary
 
 Resource   ${EXECDIR}/e2e/resource/keyword.robot
 Resource   ${EXECDIR}/e2e/resource/variable.robot
+Resource   ${EXECDIR}/e2e/resource/api-keyword.robot
+
+Test setup	  ClearDataINDB
 
 *** Variables ***
 
@@ -55,7 +60,7 @@ test เช็กอินปกติได้
     Close Window
 
 test เช็กอินคันที่51
-  ตรวจสอบการเข้าถึงหน้าแรก    ${urlmainpage}?car_size=50
+  CreateDataItem    50
 
   # ตรวจสอบคลิกปุ่ม และ disabled ปุ่ม
   Wait Until Page Contains Element  id:btnCheckin
