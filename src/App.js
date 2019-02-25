@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import CheckInPoup from './components/CheckinPopup'
 import { Container, Header, Segment ,Statistic,Message} from 'semantic-ui-react'
+import Api from './Api'
 
 class App extends Component {
   constructor(props) {
@@ -11,28 +12,23 @@ class App extends Component {
       items: [],
       disabled_btn_checkin: false,
       limit: 50,
-      display_popup_rfid: false
+      display_popup_rfid: false,
+      count: 0
     }
 
   }
 
   componentDidMount() {
-
-    var url = new URL(window.location.href)
-    var c = url.searchParams.get("car_size")
-    let items = []
-    if(c){
-      for(let i=0;i<50;i++){
-        items.push({
-          car_number: '111'+i,
-          rfid: '1'+i
-        })
-      }
-      this.setState({items: items})
-    }
-
+    this.updateCounter()
   }
 
+  updateCounter(){
+    Api.get('/carlist/count/',(status,res)=>{
+      this.setState({
+        count: res.count
+      })
+    })
+  }
   handelSubmitCheckin(data){
     let items = this.state.items
     items.push(data)
@@ -68,17 +64,10 @@ class App extends Component {
 
           <p>
             <button className='ui big red button' id="btnCheckout" onClick={()=>this.handelOpenRFIDPopup()}>Check Out</button>
-          </p>
-          
-          {/* <p>
-            <Button size='big' color='red'>Check Out</Button>
-          </p>
-
-           */}
-
-<p>
+          </p>          
+          <p>
             <Statistic horizontal>
-              <Statistic.Value><span id='car_amount'>{this.state.items.length}</span>/{this.state.limit}</Statistic.Value>
+              <Statistic.Value><span id='car_amount'>{this.state.count}</span>/{this.state.limit}</Statistic.Value>
               <Statistic.Label>คัน</Statistic.Label>
             </Statistic>
           </p>
