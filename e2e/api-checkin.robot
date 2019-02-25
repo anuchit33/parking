@@ -54,4 +54,14 @@ Get Requests
     ${resp}=       GET Request      api     /carlist/count/     headers=${headers}
     Log        ${resp.json()} 
     Should Be Equal As Strings      ${resp.status_code}     200
-    Dictionary Should Contain Key     ${resp.json()}        count
+    Dictionary Should Contain Item     ${resp.json()}        count      0
+
+    # จำรองสร้างรถ 50 รายการ
+    ${resp}=       GET Request      api     /carlist/create/50/
+    Should Be Equal As Strings      ${resp.status_code}     200
+
+    # ดึงจำนวนรถทั้งหมด 50 คัน
+    ${resp}=       GET Request      api     /carlist/count/     headers=${headers}
+    Log        ${resp.json()} 
+    Should Be Equal As Strings      ${resp.status_code}     200
+    Dictionary Should Contain Item     ${resp.json()}        count      50
