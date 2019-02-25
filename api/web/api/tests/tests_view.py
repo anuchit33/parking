@@ -41,3 +41,5 @@ class ViewTestCase(TestCase):
             self.carlist_data,
             format="json")
         self.assertEqual(self.response.status_code, 400)
+        self.assertIn('rfid',self.response.data)
+        self.assertIn('ถูกใช้งานแล้ว',self.response.data['rfid'])
