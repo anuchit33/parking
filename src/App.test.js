@@ -2,6 +2,7 @@ import React from 'react';
 import App from './App'
 import { shallow, mount } from 'enzyme';
 import CheckInPoup from './components/CheckinPopup'
+global.fetch = require('jest-fetch-mock')
 
 describe("render", () => {
   it('renders without crashing', () => {
@@ -114,3 +115,25 @@ describe("event", () => {
     expect(wrapper.state('display_popup_rfid')).toBe(true)
   })
 });
+
+
+describe("cll api", () => {
+
+  fetch.mockResponseOnce(JSON.stringify({ count: 1 }))
+
+  const wrapper = shallow(<App />)
+
+    // befor call handelCloseCheckinPopup
+    wrapper.instance().setState({count: 0})
+    expect(wrapper.state('count')).toBe(0)
+
+    wrapper.instance().updateCounter()
+
+    setTimeout(()=>{
+      expect(wrapper.state('count')).toBe(1)
+    },100)
+    
+
+
+
+})
