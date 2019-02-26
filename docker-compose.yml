@@ -6,6 +6,8 @@ services:
      - "8000:8000"
     volumes:
       - "/home/anuchit/Demo/test1/api/web:/usr/src/app"
+    networks:
+      - backend
   
   reactjs:
     build: .
@@ -13,3 +15,15 @@ services:
      - "3000:3000"
     volumes:
       - "/home/anuchit/Demo/test1:/usr/src/app"
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 112233
+      POSTGRES_USER: admin
+      POSTGRES_DB: web-api
+    networks:
+      - backend
+networks:
+  backend:
