@@ -1,0 +1,15 @@
+version: '3'
+services:
+  web-api:
+    build: ./api/web/
+    ports:
+     - "8000:8000"
+    volumes:
+      - "/home/anuchit/Demo/test1/api/web:/usr/src/app"
+  
+  reactjs:
+    build: .
+    ports:
+     - "3000:3000"
+    volumes:
+      - "/home/anuchit/Demo/test1:/usr/src/app"

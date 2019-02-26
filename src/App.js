@@ -53,7 +53,7 @@ class App extends Component {
       <Container textAlign='center' style={{width: '500px'}}>
         <br /><br />
         <Segment placeholder>
-          <Header as='h1'>Parking System</Header>
+          <Header as='h1'>Parking System Test Edit</Header>
           {disabled_btn_checkin &&   
           <Message negative id='lebelAlert'>
             <p>รถเต็มแล้ว</p>
