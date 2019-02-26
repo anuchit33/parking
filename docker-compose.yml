@@ -1,22 +1,8 @@
 version: '3'
 services:
-  web-api:
-    build: ./api/web/
-    ports:
-     - "8000:8000"
-    volumes:
-      - "/home/anuchit/Demo/test1/api/web:/usr/src/app"
-    networks:
-      - backend
-  
-  reactjs:
-    build: .
-    ports:
-     - "3000:3000"
-    volumes:
-      - "/home/anuchit/Demo/test1:/usr/src/app"
 
   db:
+    container_name: test1_db_1
     image: postgres
     restart: always
     environment:
@@ -25,5 +11,34 @@ services:
       POSTGRES_DB: web-api
     networks:
       - backend
+    volumes:
+      - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
+      - "dbdata:/var/lib/postgresql/data"
+
+
+  web-api:
+    build: ./api/web/
+    ports:
+     - "8000:8000"
+    volumes:
+      - ./api/web:/usr/src/app
+    networks:
+      - backend
+    command: >
+      bash -c "python manage.py makemigrations api && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+  
+  reactjs:
+    build: .
+    ports:
+     - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+
 networks:
   backend:
+
+volumes:
+  mydata:
+  dbdata:
