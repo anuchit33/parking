@@ -16,17 +16,17 @@ class CheckInPoup extends Component {
   }
 
   checkValid(){
-
+    let error = {}
     if(this.state.rfid==null || this.state.rfid==''){
-      alert('RFID ต้องไม่เป็นค่าว่าง')
-      return false;
+      error['error_rfid'] = 'ต้องไม่เป็นค่าว่าง'
     }
 
     if(this.state.car_number==null || this.state.car_number==''){
-      alert('หมายเลข ต้องไม่เป็นค่าว่าง')
-      return false;
+      error['error_car_number'] = 'ต้องไม่เป็นค่าว่าง'
     }
-    return true
+
+    this.setState(error)
+    return Object.keys(error).length === 0
   }
 
   handleCancelCheckin(){
@@ -46,9 +46,11 @@ class CheckInPoup extends Component {
         car_number: this.state.car_number,
         rfid: this.state.rfid
       })      
+
+      this.reset()
     }
 
-    this.reset()
+    
   }
 
   reset(){
@@ -83,11 +85,11 @@ class CheckInPoup extends Component {
                 <Grid.Column>
                   <Form>
                     <Form.Field>
-                      <label>ทะเบียนรถ</label>
+                      <label>ทะเบียนรถ <span className="red">{this.state.error_car_number}</span></label>
                       <Input placeholder='ทะเบียนรถ' name='car_number' id='inputCarNumber' value={this.state.car_number} onChange={(e,v)=>this.handleInput(e,v)} />
                     </Form.Field>
                     <Form.Field>
-                      <label>RFID</label>
+                      <label>RFID <span className="red">{this.state.error_rfid}</span></label>
                       <Input placeholder='RFID' name='rfid' id='inputRFID' value={this.state.rfid}  onChange={(e,v)=>this.handleInput(e,v)} />
                     </Form.Field>
                     <Button type='button'  onClick={()=>this.handleSubmitCheckin()} id="btnSubmitCheckin" primary>Check In</Button>
