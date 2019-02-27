@@ -17,20 +17,11 @@ class CheckInPoup extends Component {
 
   checkValid(){
 
-    for(let i in this.props.car_items){
-      const item = this.props.car_items[i]
-      console.log(this.state.rfid,item.rfid)
-      // rfid duplicate
-      console.log('rfid',this.state.rfid,item.rfid)
-      if(this.state.rfid==item.rfid){
-        this.setState({
-          popup_confirm_message: 'ผิดพลาก RFID '+item.rfid+' ถูกใช้งานแล้ว',
-          popup_confirm_display: true
-        } )
-        return false
-      }
-    }
-
+    if(this.state.rfid==null || this.state.rfid=='')
+      return false;
+      
+    if(this.state.name==null || this.state.name=='')
+      return false;
     return true
   }
 
