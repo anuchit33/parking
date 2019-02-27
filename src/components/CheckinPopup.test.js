@@ -78,6 +78,12 @@ describe("event", () => {
   });
 
 
+});
+
+describe("call function", () => {
+  beforeEach(() => {
+    wrapper = shallow(<CheckinPopup {...props} />);
+  });
   it('Unittest handleInput car_number', () => {
    
     const value = '1111'
@@ -133,28 +139,30 @@ describe("event", () => {
     
   })
 
-  it('Unittest handleSubmitCheckin rfid duplicate fail', () => {
+  it('Unittest checkValid return true', () => {
     props['car_items'].push( {
       car_number: '113',
       rfid: '1'
     })
     const e = {}
     const wrapper = shallow(<CheckinPopup {...props} />) 
-    wrapper.instance().handleInput(e,{value: '111',name: 'car_number'} )
-    wrapper.instance().handleInput(e,{value: '1',name: 'rfid'} )
-
-    wrapper.instance().handleSubmitCheckin() // 
+    wrapper.setState({value: '111',name: 'car_number'} )
     
-    // not call onSubmitSuccess
-    expect(props.onSubmitSuccess).toHaveBeenCalledTimes(0) 
-    
-    expect(wrapper.state('car_number')).toBe('')
-    expect(wrapper.state('rfid')).toBe('')
-
     // state confirm popup error
-    expect(wrapper.state('popup_confirm_display')).toBe(true)
-    expect(wrapper.state('popup_confirm_message')).toBe('ผิดพลาก RFID 1 ถูกใช้งานแล้ว')
+    expect(wrapper.instance().checkValid()).toBe(true)
     
   })
-});
-
+  it('Unittest checkValid return false', () => {
+    props['car_items'].push( {
+      car_number: '113',
+      rfid: '1'
+    })
+    const e = {}
+    const wrapper = shallow(<CheckinPopup {...props} />) 
+    wrapper.setState({value: '111'} )
+    
+    // state confirm popup error
+    expect(wrapper.instance().checkValid()).toBe(false)
+    
+  })
+})
