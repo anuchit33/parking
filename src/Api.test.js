@@ -19,4 +19,19 @@ describe('testing api', () => {
     //assert on the times called and arguments given to fetch
     expect(fetch.mock.calls.length).toEqual(1)
   })
+
+  it('calls api post carlist', () => {
+
+    fetch.mockResponseOnce(JSON.stringify({ id: 1,number: '1111',rfid: 1 }))
+ 
+    //assert on the response
+    Api.post('/carlist/',(status,res) => {
+      
+      expect(status).toEqual(201)
+      expect(res).toEqual({ id: 1,number: '1111',rfid: 1 })
+    })
+ 
+    //assert on the times called and arguments given to fetch
+    expect(fetch.mock.calls.length).toEqual(1)
+  })
 })
