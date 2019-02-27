@@ -154,9 +154,11 @@ describe("call function", () => {
     // rfid is none
     wrapper.setState({'car_number': '111',rfid:''} )
     expect(wrapper.instance().checkValid()).toBe(false)
+    expect(wrapper.state('error_rfid')).toBe('ต้องไม่เป็นค่าว่าง')
 
     // name is none
     wrapper.setState({'rfid': '1',car_number: ''} )
     expect(wrapper.instance().checkValid()).toBe(false)
+    expect(wrapper.state('car_number')).toBe('ต้องไม่เป็นค่าว่าง')
   })
 })
