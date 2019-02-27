@@ -159,6 +159,6 @@ describe("call function", () => {
     // name is none
     wrapper.setState({'rfid': '1',car_number: ''} )
     expect(wrapper.instance().checkValid()).toBe(false)
-    expect(wrapper.state('car_number')).toBe('ต้องไม่เป็นค่าว่าง')
+    expect(wrapper.state('error_car_number')).toBe('ต้องไม่เป็นค่าว่าง')
   })
 })
