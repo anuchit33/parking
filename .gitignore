@@ -32,3 +32,4 @@ __pycache__/
 migrations/
 package-lock.json
 *.sqlite3
+jest_0/
