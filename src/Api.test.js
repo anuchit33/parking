@@ -23,9 +23,9 @@ describe('testing api', () => {
   it('calls api post carlist', () => {
 
     fetch.mockResponseOnce(JSON.stringify({ id: 1,number: '1111',rfid: 1 }))
- 
+    let data ={ number: '1111',rfid: 1}
     //assert on the response
-    Api.post('/carlist/',(status,res) => {
+    Api.post('/carlist/',data,(status,res) => {
       
       expect(status).toEqual(201)
       expect(res).toEqual({ id: 1,number: '1111',rfid: 1 })
