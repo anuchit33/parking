@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import CheckInPoup from './components/CheckinPopup'
+import RFIDPopup from './components/RFIDPopup'
 import { Container, Header, Segment ,Statistic,Message} from 'semantic-ui-react'
 import Api from './Api'
 
@@ -79,6 +80,10 @@ class App extends Component {
           onClose={()=>this.handelCloseCheckinPopup()}
           car_items={this.state.items}
            />
+        <RFIDPopup 
+          car_items={this.state.items}
+          open={this.state.display_popup_rfid}
+          />
       </Container>
     );
   }
