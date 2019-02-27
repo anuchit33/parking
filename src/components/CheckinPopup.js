@@ -17,11 +17,15 @@ class CheckInPoup extends Component {
 
   checkValid(){
 
-    if(this.state.rfid==null || this.state.rfid=='')
+    if(this.state.rfid==null || this.state.rfid==''){
+      alert('RFID ต้องไม่เป็นค่าว่าง')
       return false;
-      
-    if(this.state.name==null || this.state.name=='')
+    }
+
+    if(this.state.car_number==null || this.state.car_number==''){
+      alert('หมายเลข ต้องไม่เป็นค่าว่าง')
       return false;
+    }
     return true
   }
 

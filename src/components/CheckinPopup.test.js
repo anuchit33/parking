@@ -140,29 +140,23 @@ describe("call function", () => {
   })
 
   it('Unittest checkValid return true', () => {
-    props['car_items'].push( {
-      car_number: '113',
-      rfid: '1'
-    })
-    const e = {}
+
     const wrapper = shallow(<CheckinPopup {...props} />) 
-    wrapper.setState({value: '111',name: 'car_number'} )
+    wrapper.setState({'car_number': '111',rfid:'1'} )
     
     // state confirm popup error
     expect(wrapper.instance().checkValid()).toBe(true)
     
   })
   it('Unittest checkValid return false', () => {
-    props['car_items'].push( {
-      car_number: '113',
-      rfid: '1'
-    })
-    const e = {}
     const wrapper = shallow(<CheckinPopup {...props} />) 
-    wrapper.setState({value: '111'} )
-    
-    // state confirm popup error
+
+    // rfid is none
+    wrapper.setState({'car_number': '111',rfid:''} )
     expect(wrapper.instance().checkValid()).toBe(false)
-    
+
+    // name is none
+    wrapper.setState({'rfid': '1',car_number: ''} )
+    expect(wrapper.instance().checkValid()).toBe(false)
   })
 })
