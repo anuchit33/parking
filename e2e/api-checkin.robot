@@ -80,3 +80,19 @@ Get ดึงจำนวนรถทั้งหมด 50 คัน
     Log        ${resp.json()} 
     Should Be Equal As Strings      ${resp.status_code}     200
     Dictionary Should Contain Item     ${resp.json()}        count      50
+
+
+Get ค้นหา RFID 1 จากรถ 50 คัน
+    # จำรองสร้างรถ 50 รายการ
+    Create Session      api     http://127.0.0.1:8000
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${resp}=       GET Request      api     /carlist/create/50/
+    Should Be Equal As Strings      ${resp.status_code}     200
+
+    # ดึงจำนวนรถทั้งหมด 50 คัน
+    Create Session      api     http://127.0.0.1:8000
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${resp}=       GET Request      api     /carlist/count/?rfid=1     headers=${headers}
+    Log        ${resp.json()} 
+    Should Be Equal As Strings      ${resp.status_code}     200
+    Dictionary Should Contain Item     ${resp.json()}        count      1
