@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { Modal, Button, Input, Grid, Form } from 'semantic-ui-react'
 import ConfirmPopup from './ConfirmPopup';
-
+import Api from '../Api'
 
 class CheckInPoup extends Component {
 
@@ -18,14 +18,14 @@ class CheckInPoup extends Component {
   checkValid(){
     let error = {}
     if(this.state.rfid==null || this.state.rfid==''){
-      error['error_rfid'] = 'ต้องไม่เป็นค่าว่าง'
+      error['rfid'] = 'ต้องไม่เป็นค่าว่าง'
     }
 
     if(this.state.car_number==null || this.state.car_number==''){
-      error['error_car_number'] = 'ต้องไม่เป็นค่าว่าง'
+      error['car_number'] = 'ต้องไม่เป็นค่าว่าง'
     }
 
-    this.setState(error)
+    this.setState({error: error})
     return Object.keys(error).length === 0
   }
 
@@ -33,23 +33,38 @@ class CheckInPoup extends Component {
     this.reset()
     this.props.onClose()
   }
-  handleSubmitCheckin(){
+  async handleSubmitCheckin(){
 
 
     if(this.checkValid()==true){
-      this.setState({
-        popup_confirm_message: 'สำเร็จ',
-        popup_confirm_display: true
-      } )
-
-      this.props.onSubmitSuccess({
-        car_number: this.state.car_number,
+      const data_post = {
+        number: this.state.car_number,
         rfid: this.state.rfid
-      })      
+      }
+
+      const data = await Api.post('/carlist/',data_post)
+      if(data.status_code==201 || data.status_code==200){
+        this.setState({
+          popup_confirm_message: 'สำเร็จ',
+          popup_confirm_display: true
+        } )
+
+        
+  
+        this.props.onSubmitSuccess({
+          car_number: this.state.car_number,
+          rfid: this.state.rfid
+        })      
+        console.log('onSubmitSuccess')
+      }else{ console.log('onSubmitSuccess error')
+        this.setState({
+          error: data.data
+        })
+      }
+      
 
       this.reset()
     }
-
     
   }
 
