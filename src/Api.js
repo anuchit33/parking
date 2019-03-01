@@ -23,7 +23,7 @@ export default {
         status_code: response.status
     }
   },
-  post: async (url, formData) => {
+  post: async (path, formData) => {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     for (let k in formData) {
@@ -31,7 +31,7 @@ export default {
         delete formData[k]
     }
     let status = 200
-    const response =  await  fetch(url, {
+    const response =  await  fetch(baseUrl + path, {
       method: 'POST',
       mode: 'cors',
       headers: headers,
