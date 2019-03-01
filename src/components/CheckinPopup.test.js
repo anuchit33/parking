@@ -1,6 +1,7 @@
 import React from 'react';
 import CheckinPopup from './CheckinPopup'
 import {shallow} from 'enzyme';
+global.fetch = require('jest-fetch-mock')
 
 let wrapper,handelSubmitCheckin=jest.fn(),handleCloseAlert=jest.fn();
 const props = {
@@ -101,16 +102,16 @@ describe("call function", () => {
     expect(wrapper.state('rfid')).toBe(value)
   })
 
-  it('Unittest handleSubmitCheckin', () => {
+  it('Unittest handleSubmitCheckin', async () => {
 
     const e = {}   
-    wrapper.instance().handleInput(e,{value: '111',name: 'car_number'} )
-    wrapper.instance().handleInput(e,{value: '1',name: 'rfid'} )
+    fetch.mockResponseOnce(JSON.stringify([{number: 1111,rfid: 1}]))
+    wrapper.setState({'rfid': 1,'car_number': '1111'})
 
-    wrapper.instance().handleSubmitCheckin() // 
-    expect(props.onSubmitSuccess).toHaveBeenCalledTimes(1) 
+    await wrapper.instance().handleSubmitCheckin() //
+    expect(props.onSubmitSuccess).toHaveBeenCalledTimes(1)     
     
-    expect(props.onSubmitSuccess.mock.calls[0][0]).toEqual({ car_number: '111', rfid: '1' })
+    expect(props.onSubmitSuccess.mock.calls[0][0]).toEqual({ car_number: '1111', rfid: 1})
     
     expect(wrapper.state('car_number')).toBe('')
     expect(wrapper.state('rfid')).toBe('')
@@ -154,11 +155,11 @@ describe("call function", () => {
     // rfid is none
     wrapper.setState({'car_number': '111',rfid:''} )
     expect(wrapper.instance().checkValid()).toBe(false)
-    expect(wrapper.state('error_rfid')).toBe('ต้องไม่เป็นค่าว่าง')
+    expect(wrapper.state('error').rfid).toBe('ต้องไม่เป็นค่าว่าง')
 
     // name is none
     wrapper.setState({'rfid': '1',car_number: ''} )
     expect(wrapper.instance().checkValid()).toBe(false)
-    expect(wrapper.state('error_car_number')).toBe('ต้องไม่เป็นค่าว่าง')
+    expect(wrapper.state('error').car_number).toBe('ต้องไม่เป็นค่าว่าง')
   })
 })
