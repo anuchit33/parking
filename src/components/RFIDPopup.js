@@ -16,6 +16,13 @@ class RFIDPopup extends Component {
         })
     }
 
+    handleSubmitRFID(e){
+
+        if (e.keyCode == 13) {
+            // Do something
+        }
+    }
+
     render() {
         return (
             
@@ -25,7 +32,7 @@ class RFIDPopup extends Component {
 
                         <Modal.Description>
                         <div id="rfidPopup">
-                            <Input placeholder='RFID' name='rfid' id='inputRFID' value={this.state.rfid}  onChange={(e,v)=>this.handleInput(e,v)} />
+                            <Input onKeyUp={(e)=>this.handleSubmitRFID(e)} placeholder='RFID' name='rfid' id='inputRFID' value={this.state.rfid}  onChange={(e,v)=>this.handleInput(e,v)} />
                             </div>
                         </Modal.Description>
                     </Modal.Content>
