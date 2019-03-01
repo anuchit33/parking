@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css'
 import 'semantic-ui-css/semantic.min.css'
 import CheckInPoup from './components/CheckinPopup'
 import RFIDPopup from './components/RFIDPopup'
