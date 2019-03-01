@@ -10,7 +10,15 @@ from rest_framework.response import Response
 
 class CreateView(generics.ListCreateAPIView):
     
-    queryset = CarList.objects.all()
+    def get_queryset(self):
+
+        queryset = CarList.objects.all()
+
+        rfid = self.request.GET.get('rfid',None)
+        if rfid is not None:
+            queryset = queryset.filter(rfid=rfid)
+        return queryset
+    
     serializer_class = CarlistSerializer
 
     def perform_create(self, serializer):
