@@ -121,6 +121,25 @@ describe("call function", () => {
   })
 
 
+  it('Unittest handleSubmitCheckin RFID duplicate', async () => {
+
+    const e = {}   
+    fetch.mockResponses(
+      [
+        JSON.stringify([{rfid: 'RFID 1 ถูกใช้งานแล้ว'}]),
+        { status: 400 }
+      ])
+    wrapper.setState({'rfid': 1,'car_number': '1111'})
+
+    await wrapper.instance().handleSubmitCheckin() //
+    expect(props.onSubmitSuccess).toHaveBeenCalledTimes(0)     
+    
+    expect(wrapper.state('error').rfid).toBe('RFID 1 ถูกใช้งานแล้ว')
+
+    props.onSubmitSuccess.mockClear()
+    
+  })
+
   it('Unittest handleCloseAlert and call props onClose', () => {
 
     wrapper.instance().handleCloseAlert() // 
