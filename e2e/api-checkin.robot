@@ -92,7 +92,7 @@ Get ค้นหา RFID 1 จากรถ 50 คัน
     # ดึงจำนวนรถทั้งหมด 50 คัน
     Create Session      api     http://127.0.0.1:8000
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${resp}=       GET Request      api     /carlist/count/?rfid=1     headers=${headers}
+    ${resp}=       GET Request      api     /carlist/?rfid=1    headers=${headers}
     Log        ${resp.json()} 
     Should Be Equal As Strings      ${resp.status_code}     200
-    Dictionary Should Contain Item     ${resp.json()}        count      1
+    Dictionary Should Contain Item     ${resp.json()[0]}         rfid     1
