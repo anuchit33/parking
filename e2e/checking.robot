@@ -62,6 +62,8 @@ test เช็กอินปกติได้
 test เช็กอินคันที่51
   CreateDataItem    50
 
+  ตรวจสอบการเข้าถึงหน้าแรก    ${urlmainpage}
+
   # ตรวจสอบคลิกปุ่ม และ disabled ปุ่ม
   Wait Until Page Contains Element  id:btnCheckin
   Element Should Be Disabled   id:btnCheckin
@@ -89,7 +91,7 @@ test เช็กอิน RFID ซ้ำ
 
   # กดปุ่มบันทึกเช็กอินสำเร็จ
   Wait Until Page Contains Element  id:alert_message
-  Element Text Should Be    id:alert_message    ผิดพลาก RFID 1 ถูกใช้งานแล้ว
+  Element Text Should Be    id:alert_message    RFID 1 ถูกใช้งานแล้ว
 
   Close Window
 
