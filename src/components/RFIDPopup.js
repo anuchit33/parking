@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { Modal, Button ,Input} from 'semantic-ui-react'
+import Api from '../Api'
 
 class RFIDPopup extends Component {
 
@@ -16,10 +17,18 @@ class RFIDPopup extends Component {
         })
     }
 
-    handleSubmitRFID(e){
+    async handleSubmitRFID(e){
+
+        console.log(e)
 
         if (e.keyCode == 13) {
-            // Do something
+            const data = await Api.get('/carlist/?rfid='+this.state.rfid)
+
+            if(data.data.length==1){
+                this.setState({
+                    carlist: data.data[0]
+                })
+            }
         }
     }
 
