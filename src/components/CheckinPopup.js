@@ -10,7 +10,8 @@ class CheckInPoup extends Component {
     super(props);
     this.state = {
       popup_confirm_message: '',
-      popup_confirm_display: false
+      popup_confirm_display: false,
+      error: {}
     }
 
   }
@@ -48,9 +49,7 @@ class CheckInPoup extends Component {
           popup_confirm_message: 'สำเร็จ',
           popup_confirm_display: true
         } )
-
-        
-  
+      
         this.props.onSubmitSuccess({
           car_number: this.state.car_number,
           rfid: this.state.rfid
@@ -58,7 +57,10 @@ class CheckInPoup extends Component {
         console.log('onSubmitSuccess')
       }else{ console.log('onSubmitSuccess error')
         this.setState({
-          error: data.data
+          error: data.data,
+
+          popup_confirm_display: data.data.rfid!=null,
+          popup_confirm_message: data.data.rfid
         })
       }
       
@@ -100,11 +102,11 @@ class CheckInPoup extends Component {
                 <Grid.Column>
                   <Form>
                     <Form.Field>
-                      <label>ทะเบียนรถ <span className="red">{this.state.error_car_number}</span></label>
+                      <label>ทะเบียนรถ <span className="red">{this.state.error.car_number}</span></label>
                       <Input placeholder='ทะเบียนรถ' name='car_number' id='inputCarNumber' value={this.state.car_number} onChange={(e,v)=>this.handleInput(e,v)} />
                     </Form.Field>
                     <Form.Field>
-                      <label>RFID <span className="red">{this.state.error_rfid}</span></label>
+                      <label>RFID <span className="red">{this.state.error.rfid}</span></label>
                       <Input placeholder='RFID' name='rfid' id='inputRFID' value={this.state.rfid}  onChange={(e,v)=>this.handleInput(e,v)} />
                     </Form.Field>
                     <Button type='button'  onClick={()=>this.handleSubmitCheckin()} id="btnSubmitCheckin" primary>Check In</Button>
