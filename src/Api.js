@@ -7,26 +7,23 @@ const jsonToQueryString =  function (json) {
   }).join('&');
 }
 export default {
-  get: function (path, cb) {
+  get: async function (path) {
     var headers = new Headers();
-    var status = 200
-    fetch(baseUrl + path, {
+
+    const response = await fetch(baseUrl + path, {
       method: 'GET',
       mode: 'cors',
       credentials: 'omit',
       redirect: 'manual',
       headers: headers
-    }).then((response) => {
-      status = response.status
-      return response.json()
-
-    }).then((resJson) => {
-      cb(status == 200, resJson, status);
-    }).catch((e) => {
-      cb(false, e, status);
-    });
+    })    
+    const data = await response.json()
+    return {
+        data: data,
+        status_code: response.status
+    }
   },
-  post: (url, formData, cb) => {
+  post: async (url, formData) => {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     for (let k in formData) {
@@ -34,19 +31,16 @@ export default {
         delete formData[k]
     }
     let status = 200
-    fetch(url, {
+    const response =  await  fetch(url, {
       method: 'POST',
       mode: 'cors',
       headers: headers,
       body: jsonToQueryString(formData)
-    }).then((response) => {
-      status = response.status
-      return response.json()
-    }).then((resJson) => {
-      console.log('response', resJson);
-      cb(true, resJson,status);
-    }).catch((e) => {
-      cb(false, {error: e},status);
-    });
+    })
+    const data = await response.json()
+    return {
+        data: data,
+        status_code: response.status
+    }
   }
 }

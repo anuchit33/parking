@@ -23,12 +23,15 @@ class App extends Component {
     this.updateCounter()
   }
 
-  updateCounter(){
-    Api.get('/carlist/count/',(status,res)=>{
-      this.setState({
-        count: res.count
-      })
-    })
+  async updateCounter(){
+
+    const data = await Api.get('/carlist/')
+    this.setState({ 
+      count: data.data.length ,
+      items: data.data
+    });
+    
+
   }
   handelSubmitCheckin(data){
     let items = this.state.items
