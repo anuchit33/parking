@@ -37,5 +37,15 @@ describe("event", () => {
     expect(wrapper.state('rfid')).toBe(value)
   })
 
+  it('Unittest handleInput rfid enter', () => {
+    const wrapper = shallow(<RFIDPopup {...props} />)
+
+    wrapper.instance().handleSubmitRFID = jest.fn()
+    wrapper.find('#inputRFID').simulate('keyup', {key: 'Enter'})
+    expect(wrapper.instance().handleSubmitRFID).toHaveBeenCalledTimes(1)
+
+    wrapper.instance().handleSubmitRFID.mockClear()
+  });
+
 });
 
