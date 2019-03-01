@@ -34,8 +34,7 @@ class App extends Component {
 
   }
   handelSubmitCheckin(data){
-    let items = this.state.items
-    items.push(data)
+    this.updateCounter()
   }
   handelOpenCheckinPopup(){
     this.setState({display_popup_checkin: true})
