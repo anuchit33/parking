@@ -20,14 +20,19 @@ describe("render", () => {
     const wrapper = mount(<App />);
 
     // auto add car 50 item
+    let items = []
     for(let i=0;i<50;i++)
-      wrapper.instance().handelSubmitCheckin({car_number: '11'+i,rfid: '1'+i})
+      items.push({car_number: '11'+i,rfid: '1'+i})
+    wrapper.setState({items: items})
     
     // car item = 50
     expect(wrapper.state('items').length).toBe(50)
 
-    const btnCheckin = wrapper.find('#btnCheckin')
-    expect(btnCheckin.prop('disabled')).toBe(false)
+    setTimeout(()=>{
+      const btnCheckin = wrapper.find('#btnCheckin')
+      expect(btnCheckin.prop('disabled')).toBe(false)
+    },100)
+    
     
   });
 });
@@ -38,8 +43,10 @@ it('renders car 50item to show alert', () => {
   expect(wrapper.find('#lebelAlert')).toHaveLength(0)
 
   // auto add car 50 item
+  let items = []
   for(let i=0;i<50;i++)
-    wrapper.instance().handelSubmitCheckin({car_number: '11'+i,rfid: '1'+i})
+    items.push({car_number: '11'+i,rfid: '1'+i})
+  wrapper.setState({items: items})
   
   // car item = 50
   expect(wrapper.state('items').length).toBe(50)
@@ -86,10 +93,12 @@ describe("event", () => {
 
   it('Unittest handelSubmitCheckin', () => {
     const wrapper = shallow(<App />)
+
+    wrapper.instance().updateCounter = jest.fn()
     wrapper.instance().handelSubmitCheckin({car_number: '111',rfid: '1'})
 
-    // car item = 1
-    expect(wrapper.state('items').length).toBe(1)
+    expect(wrapper.instance().updateCounter).toHaveBeenCalledTimes(1)
+    
   })
 
   it('Unittest handelCloseCheckinPopup', () => {
