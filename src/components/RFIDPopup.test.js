@@ -48,13 +48,14 @@ describe("event", () => {
     wrapper.instance().handleSubmitRFID.mockClear()
   });
 
-  it('Unittest handleSubmitRFID call api', () => {
-    fetch.mockResponseOnce(JSON.stringify({number: '1111',rfid: 1,id: 1}))
+  it('Unittest handleSubmitRFID call api', async () => {
+    fetch.mockResponseOnce(JSON.stringify([{number: '1111',rfid: 1,id: 1}]))
 
 
     const wrapper = shallow(<RFIDPopup {...props} />)
     wrapper.setState({rfid: 1})
-    wrapper.instance().handleSubmitRFID({keyCode: 13})
+    await wrapper.instance().handleSubmitRFID({keyCode: 13})
+
     expect(wrapper.state('carlist').number).toBe('1111')
     expect(wrapper.state('carlist').rfid).toBe(1)
   });
