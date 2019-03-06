@@ -3,6 +3,7 @@ import './App.css'
 import 'semantic-ui-css/semantic.min.css'
 import CheckInPoup from './components/CheckinPopup'
 import RFIDPopup from './components/RFIDPopup'
+import CheckoutPopup from './components/CheckoutPopup'
 import { Container, Header, Segment ,Statistic,Message} from 'semantic-ui-react'
 import Api from './Api'
 
@@ -15,7 +16,8 @@ class App extends Component {
       disabled_btn_checkin: false,
       limit: 50,
       display_popup_rfid: false,
-      count: 0
+      count: 0,
+      checkout_data: {}
     }
 
   }
@@ -51,6 +53,26 @@ class App extends Component {
     })
   }
 
+  handelCloseRFIDPopup(){
+    this.setState({
+      display_popup_rfid: false
+    })
+  }
+
+  handelRFIDData(data){
+    this.setState({
+      display_popup_checkout: true,
+      checkout_data: data,
+      display_popup_rfid: false
+    })
+  }
+
+  handelCloseCheckoutPopup(){
+    this.setState({
+      display_popup_checkout: false
+    })
+  }
+
   render() {
     const disabled_btn_checkin = this.state.items.length>=this.state.limit
     return (
@@ -83,9 +105,15 @@ class App extends Component {
           onClose={()=>this.handelCloseCheckinPopup()}
           car_items={this.state.items}
            />
+        <CheckoutPopup
+          onClose={()=>this.handelCloseCheckoutPopup()}
+          open={this.state.display_popup_checkout}
+          data={this.state.checkout_data} />
         <RFIDPopup 
+          onClose={()=>this.handelCloseRFIDPopup()}
           car_items={this.state.items}
           open={this.state.display_popup_rfid}
+          onData={(d)=>this.handelRFIDData(d)}
           />
       </Container>
     );

@@ -12,7 +12,7 @@ class CreateView(generics.ListCreateAPIView):
     
     def get_queryset(self):
 
-        queryset = CarList.objects.all()
+        queryset = CarList.objects.all().filter(status=1)
 
         rfid = self.request.GET.get('rfid',None)
         if rfid is not None:

@@ -42,5 +42,25 @@ export default {
         data: data,
         status_code: response.status
     }
+  },
+  patch: async (path, formData) => {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    for (let k in formData) {
+      if(formData[k]=='null' || formData[k]==null)
+        delete formData[k]
+    }
+    let status = 200
+    const response =  await  fetch(baseUrl + path, {
+      method: 'PATCH',
+      mode: 'cors',
+      headers: headers,
+      body: jsonToQueryString(formData)
+    })
+    const data = await response.json()
+    return {
+        data: data,
+        status_code: response.status
+    }
   }
 }

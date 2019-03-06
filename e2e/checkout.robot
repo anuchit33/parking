@@ -8,6 +8,8 @@ Resource   ${EXECDIR}/e2e/resource/variable.robot
 
 ${urlmainpage}    http://localhost:3000/
 
+Test setup	  ClearDataINDB
+
 *** Test Cases ***
 
 test เช็กเอาสำเร็จ
@@ -27,3 +29,5 @@ test เช็กเอาสำเร็จ
 
   # แสดงข้อมูลเช็กเอา
   Wait Until Page Contains Element  id:popupCheckout
+
+  ClearDataINDB

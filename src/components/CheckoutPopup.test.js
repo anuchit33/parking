@@ -24,10 +24,8 @@ class RFIDPopup extends Component {
 
             if(data.data.length==1){
                 this.setState({
-                    rfid: '',                    
+                    carlist: data.data[0]
                 })
-
-                this.props.onData(data.data[0])
             }
         }
     }
@@ -36,7 +34,7 @@ class RFIDPopup extends Component {
         return (
             
                 <Modal open={this.props.open} size='tiny' >
-                    <Modal.Header>Scan RFID</Modal.Header>
+                    <Modal.Header>Alert</Modal.Header>
                     <Modal.Content>
 
                         <Modal.Description>
@@ -54,7 +52,6 @@ class RFIDPopup extends Component {
 }
 RFIDPopup.propTypes = {
     open: PropTypes.bool.isRequired,
-    onData: PropTypes.func.isRequired,
     car_items: PropTypes.array.isRequired
 }
 

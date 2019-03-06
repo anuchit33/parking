@@ -114,6 +114,19 @@ describe("event", () => {
     expect(wrapper.state('display_popup_checkin')).toBe(false)
   })
 
+  it('Unittest handelCloseRFIDPopup', () => {
+    const wrapper = shallow(<App />)
+
+    // befor call handelCloseCheckinPopup
+    wrapper.instance().setState({display_popup_checkin: true})
+    expect(wrapper.state('display_popup_rfid')).toBe(true)
+
+    wrapper.instance().handelCloseCheckinPopup()
+
+    // display_popup_checkin is False
+    expect(wrapper.state('display_popup_rfid')).toBe(false)
+  })
+  
 
   it('Unittest handelOpenRFIDPopup', () => {
     const wrapper = shallow(<App />)
@@ -142,9 +155,6 @@ describe("cll api", () => {
 
     setTimeout(()=>{
       expect(wrapper.state('count')).toBe(1)
-    },100)
-    
-
-
+    },100) 
 
 })

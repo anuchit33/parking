@@ -50,8 +50,6 @@ describe("event", () => {
 
   it('Unittest handleSubmitRFID call api', async () => {
     fetch.mockResponseOnce(JSON.stringify([{number: '1111',rfid: 1,id: 1}]))
-
-
     const wrapper = shallow(<RFIDPopup {...props} />)
     wrapper.setState({rfid: 1})
     await wrapper.instance().handleSubmitRFID({keyCode: 13})
