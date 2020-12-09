@@ -1,3 +1,3 @@
 # Example for TDD on Django + Reactjs.
-- 'test' robot
+- `test` robot
 - unittest
