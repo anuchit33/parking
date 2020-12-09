@@ -1,3 +1,3 @@
-## Example for TDD on Django + Reactjs.
+# Example for TDD on Django + Reactjs.
 - robot
 - unittest
